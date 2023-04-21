@@ -1,56 +1,35 @@
-def Bangla_Number(int):
-    ans = ''
-    
-    kuti = int // 10000000
-    int %= 10000000
-    if kuti:
-        ans += ' {} kuti'.format(kuti)    
-    
-    lakh = int // 100000
-    int %= 100000
-    if lakh:
-        ans += ' {} lakh'.format(lakh)
-    
-    hajar = int // 1000
-    int %= 1000
-    if hajar:
-        ans += ' {} hajar'.format(hajar)
-            
-    shata = int // 100
-    int %= 100
-    if shata:
-        ans += ' {} shata'.format(shata)
-        
-    if int:
-        ans += ' {}'.format(int)
-        
-    return ans 
+def bangla_number(x):
+    if x == 0:
+        return 
+    if x // 10000000:
+        bangla_number(x)
+        print(' kuti',end='')
+        x %= 10000000
+    if x // 100000:
+        bangla_number(x)
+        print(' lakh',end='')
+        x %= 100000
+    if x // 1000:
+        bangla_number(x)
+        print(' hajar', end='')
+        x %= 1000
+    if x // 100:
+        bangla_number(x)
+        print(' shata', end='')
+    if x:
+        print(' {}'.format(x))
 
+#main
 try:
-    label = 1 
-    
+    label = 1
     while True:
-        ans = ''
-        num = str(input())
-        
-        if len(num) >= 8:
-            kuti = int(num[:-7])
-            num = num[-7:]
-            # print(f'{kuti=} {num=}')
-            
-            ans += Bangla_Number(kuti)
-            ans += ' kuti'
-            # print(f'{ans=}')
-
-        num = int(num)
-        ans += Bangla_Number(num)
-        
-        if ans:
-            print('{}.{}'.format(label, ans))
+        n = int(input())
+        print('{4d:}'.format(n))
+        if n :
+            bangla_number(n)
         else:
-            print('{}. 0'.format(label))
-
+            print('0')
+        print()
         label += 1
-        
 except EOFError:
     pass
