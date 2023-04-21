@@ -6,11 +6,11 @@ def bangla_number(x):
         print(' kuti',end='')
         x %= 10000000
     if x // 100000:
-        bangla_number(x /100000)
+        bangla_number(x //100000)
         print(' lakh',end='')
         x %= 100000
     if x // 1000:
-        bangla_number(x / 1000)
+        bangla_number(x // 1000)
         print(' hajar', end='')
         x %= 1000
     if x // 100:
