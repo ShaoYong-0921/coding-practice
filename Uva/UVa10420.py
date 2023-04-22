@@ -8,7 +8,7 @@ for i in range(n):
     if string[0] in counties:
         counties[string[0]] += 1
     else:
-        counties[string[0]] = 0
+        counties[string[0]] = 1
 
 ans = sorted(counties)
 
