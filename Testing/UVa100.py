@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-a, b = map(int, input().split())
-print(type(b))
-=======
 def algorithm(x):
     output = [x]
     
@@ -33,4 +29,3 @@ try:
 
 except EOFError:
     pass
->>>>>>> 494df3d959d63de09890f32c8801f7ad944ccf12
