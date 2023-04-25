@@ -1,24 +1,2 @@
-preetty
-womeeeeen
-walking
-down
-the
-street
-ab
-ba
-abc
-acd
-down
-won
-prettywoman
-walkingdown
-inging
-singing
-abc
-
-efg
-
-
-ghi
-a
-a
+1 10 
+100 200
