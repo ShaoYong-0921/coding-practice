@@ -4,24 +4,17 @@ for line in sys.stdin.readlines():
     # print(f'{num = }')
 
     absolute = [abs(num[x+1] - num[x])  for x in range(len(num)-1)]
+    # absolute.sort()
     print(f'{absolute = }')
-    absolute.sort()
     
-    if len(absolute) == 1:
-        status = True
-
-
-    for i in range(len(absolute)-1):
-        # print(f'{absolute[i] = }')
-        # print(f'{absolute[i+1] = }')
-        if absolute[i] == absolute[i+1] or absolute[i]+1 == absolute[i+1]:
-            status = True
-            # print('y')
-        else:
-            # print('n')
+    status = True
+    for i in range(max(absolute), min(absolute), -1):
+        
+        if i not in absolute:
+            print('Not jolly')
             status = False
             break
+        
+        
     if status:
-        print('jolly')
-    else:
-        print('not jolly')
+        print('Jolly')
