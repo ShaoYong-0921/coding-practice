@@ -1,7 +1,7 @@
 import sys 
 for line in sys.stdin.readlines():
     num = list(map(int, line.split()))
-    # print(f'{num = }')
+    # print(f'{num =  }')
 
     absolute = [abs(num[x+1] - num[x])  for x in range(len(num)-1)]
     # absolute.sort()
