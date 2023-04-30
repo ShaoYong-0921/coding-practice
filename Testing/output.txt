@@ -1,24 +1,7 @@
-absolute = [1999]
-jolly
-absolute = [2, 3, 3, 4, 7]
-not jolly
-absolute = [1, 1997]
-not jolly
-absolute = [1, 2, 3, 3]
-jolly
-absolute = [1, 2, 3, 4]
-jolly
-absolute = [1, 2, 3, 3]
-jolly
-absolute = [1, 2, 3, 3]
-jolly
-absolute = [1, 2, 3]
-jolly
-absolute = [1, 2, 3, 3]
-jolly
-absolute = [1, 1, 3, 3]
-not jolly
-absolute = [1, 2]
-jolly
-absolute = [0]
-jolly
+ !impossible
+ !impossible
+ !impossible
+ !impossible
+ !impossible
+ !impossible
+ !impossible
