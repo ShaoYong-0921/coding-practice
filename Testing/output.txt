@@ -1,7 +1,6 @@
- !impossible
- !impossible
- !impossible
- !impossible
- !impossible
- !impossible
- !impossible
+0.0100
+0.0100
+0.0010
+0.0000
+0.1667
+0.0290

@@ -9,7 +9,7 @@ def f(x, list):
         power -= 1
 
         
-    return print(int(y))
+    return y
 import time
 import sys
 time1 = time.time()
@@ -20,8 +20,8 @@ try:
     while True:
         x = int(input())
         a = list(map(int, input().split()))
-
-        f(x, a)
+        ans = int(f(x, a))
+        print(ans)
 
 except EOFError:
     pass

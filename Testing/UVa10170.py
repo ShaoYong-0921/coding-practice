@@ -12,3 +12,6 @@ for line in sys.stdin.readlines():
             break
         s += 1
 
+
+
+
