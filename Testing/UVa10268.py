@@ -8,20 +8,14 @@ def f(x, list):
         # print(f'{ power = } {y = }')
         power -= 1
 
-        
     return y
-import time
-import sys
-time1 = time.time()
 
-bool = True
-try:
-    
-    while True:
+while True:
+    try:
         x = int(input())
         a = list(map(int, input().split()))
-        ans = int(f(x, a))
+        ans = f(x, a)
         print(ans)
 
-except EOFError:
-    pass
+    except EOFError:
+        break
