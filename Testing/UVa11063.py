@@ -3,8 +3,9 @@ first = False
 
 while True:
     try:
-        # if first:
-        #     spece = input()
+        if first:
+            spece = input()
+            
         first = True
         n = int(input())
         listB = list(map(int, input().split()))
