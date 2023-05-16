@@ -1,2 +1,4 @@
-Pair #1 All you need is love!
-Pair #2 Love is not all you need!
+n = 1 m = 49
+Boring!
+n = 2 m = 0
+Boring!

@@ -1,0 +1,128 @@
+SEC1 EQU 30H
+SEC2 EQU 31H
+MIN1 EQU 32H
+MINW EQU 33H
+
+    ORG 0000H
+    JMP MAIN
+    ORG 0003H
+    JMP INT0SUB
+    ORG 000BH
+    JMP TOSUB
+
+MAIN:
+    MOV TMOD, #00000001B
+    MOV TH0, #3CH
+    MOV TL0, #0B0H
+    SETB TR0
+    MOV R3, #20
+    SETB INT0
+    SETB EA
+    SETB EX0
+    SETB ETO
+
+    MOV SEC1, #0
+    MOV SEC2, #0
+    MOV MIN1, #0
+    MOV MIN2, #0
+
+
+LOOP:
+    CALL DISPLAY
+    JMP LOOP
+
+
+DISPLAY:
+    MOV DPTR, #TABLE 
+    
+    MOV A, SEC1
+    MOVC A, @A + DPTR
+    MOV P2, A
+    MOV P0, #OF7H
+    CALL D5MS
+
+    MOV A, SEC2
+    MOVC A, @A + DPTR
+    MOV P2, A
+    MOV P0, #0FBH
+    CALL D5MS
+
+    MOV A, MIN1
+    MOVC A, @A + DPTR
+    MOV P2, A
+    MOV P0, #OFDH
+
+    MOV A, MIN2
+    MOVC A, @A + DPTR
+    MOV P2, A
+    MOV P0, #OFEH
+    CALL D5MS
+    RET
+
+
+DELAY:
+    MOV R6, #200
+D1:
+    MOV R7, #250
+    DJNZ R7, $
+    DJNZ R6, D1
+    RET
+
+
+D5MS:
+    MOV R6, #13
+DL2:
+    MOV R7, #200
+    DJNZ R7, $
+    DJNZ R6, DL2
+    RET
+
+
+TABLE:
+    DB 0C0H, 0F9H, 0A4H, 0B0H, 99H, 92H, 82H, 0F8H, 80H, 90H
+
+
+INT0SUB:
+    CALL DELAY
+    JB INT0, INT0RET
+WAIT:
+    JNB INTO, WAIT
+    MOV SEC1, #0
+    MOV SEC2, #0
+    MOV MIN1, #0
+    MOV MIN2, #0
+
+INT0RET:
+    RETI
+
+
+TOSUB:
+     MOV TH0, #3CH
+     MOV TL0, #0B0H
+     DJNZ R3, T0RET
+     MOV R3, #20
+     
+     INC SEC1
+     MOV A, SEC1
+     CJNE A, #10 ,T0RET 
+     MOV SEC1, #0
+     
+     INC SEC2
+     MOV A, SEC2
+     CJNE A, #6, T0RET
+     MOV SEC2, #0
+
+     INC MIN1
+     MOV A, MIN1
+     CJNE A, #10, TORET
+     MOV MIN1, #0
+
+     INC MIN2 
+     MOV A, MIN2
+     CJNE A, #6, T0RET
+     MOV MIN2, #0
+
+T0RET:
+    RETI
+    
+    END
