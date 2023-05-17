@@ -17,7 +17,7 @@ try:
             # print(f'{n = }')
             num_list.append(n)
 
-            if n == 1:
+            if n == 1 or m == 1:
                 break
 
             if n % m != 0:

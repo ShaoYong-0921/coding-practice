@@ -1,0 +1,47 @@
+ORG 0000H
+MOV SCON, #01000000B
+MOM TMOC, #00100000B
+MOV TH1, #230
+SETB TR1
+
+MOV R1, #0
+MOV DPTR, #TABLE
+
+MAIN:
+    MOV A, R1
+    MOVC A, @A + DPTR
+    MOV P2, A
+
+LOOP:
+    JB P3.2, LOOP1
+    CALL DELAY 
+    JB P3.2, LOOP
+    JNB P3.2, $
+    INC R1
+    CJNE R1, #10, MAIN    
+    MOV R1, #0
+    JMP MAIN
+
+LOOP1:
+    JB P3.3, LOOP
+    CALL DELAY
+    JB P3.3, LOOP1
+    JNB P3.3, $
+    MOV SBUF, R1
+    JNB TI, $
+    CLR TI
+    JMP LOOP
+
+DELAY:
+    MOV R6, #200
+D1:
+    MOV R7, #250
+    DJNZ R7,$
+    DJNZ R6, D1
+    RET
+
+
+TABLE:
+    DB 0C0H, 0F9H, 0A4H, 0B0H, 99H, 92H, 82H, 0F8H, 80H, 90H
+
+    END
