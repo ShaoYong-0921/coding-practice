@@ -1,21 +1,25 @@
-def f(x, list):
-    power = len(list)-1
-    y = 0
-    for i in list:
-        if power == 0:
-            break
-        y += i * power * ( x ** (power - 1 ))
-        # print(f'{ power = } {y = }')
-        power -= 1
-
-    return y
-
 while True:
     try:
         x = int(input())
-        a = list(map(int, input().split()))
-        ans = f(x, a)
-        print(ans)
+        list_a = [int(x) for x in input().split()]
+        list_a.pop(-1)
+        ans = 0
+        
+
+        power = len(list_a)
+        
+        
+        for a in list_a:
+
+            # print(f'{x = }; {power = }; {i = }; {a = }')
+            ans *= x
+            ans += a * power
+
+            # print(f'{ans = }')
+            power -= 1
+                
+
+            print(ans)
 
     except EOFError:
         break
