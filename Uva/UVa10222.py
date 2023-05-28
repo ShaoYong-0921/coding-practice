@@ -14,5 +14,4 @@ for i in string:
         index = table.index(i)
         print(table[index-2], end='')
 
-#??
-print('')
+print()
