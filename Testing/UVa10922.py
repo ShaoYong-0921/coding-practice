@@ -20,5 +20,6 @@ while True:
     n = int(n)
 
     if n % 9 == 0:
+        print(f'{s} is a multiple of 9 and has 9-degree {ans}.')
     else:
         print(f'{s} is not a multiple of 9.')
