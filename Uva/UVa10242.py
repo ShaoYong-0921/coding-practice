@@ -1,14 +1,23 @@
-from collections import Counter
+def most_common(lst):
+    counter = 0
+    num = 0
 
-def most_common(list):
-    data = Counter(list)
-    return max(list, key=data.get)
+    for i in lst:
+        curr_frequency = lst.count(i)
+        if(curr_frequency > counter):
+            counter = curr_frequency
+            num = i
+ 
+    return num
 
 while True:
     try:
         x = []
         y = []
         inputs = list( map( float, input().split() ) )
+        
+        if len(inputs) != 8:
+            break
 
         for i in range(len(inputs)):
             if i % 2 == 0:
@@ -30,7 +39,8 @@ while True:
             ans_y += i
         ans_y -= y_point * 3
         
-        print('{:.3f} {:.3f}'.format(ans_x, ans_y))
+        # print('{:.3f} {:.3f}'.format(ans_x, ans_y))
+        print(f'{ans_x:.3f} {ans_y:.3f}')
 
     except EOFError:
         break
