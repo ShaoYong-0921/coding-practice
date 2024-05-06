@@ -1,6 +1,6 @@
 #include <iostream>
 #include <algorithm>
-#include <ctime>
+// #include <ctime>
 
 using namespace std;
 
@@ -14,9 +14,12 @@ void dfs(int depth){
     int i, last;
     if (depth == s.size()){
         path[depth] = 0;
+        long long n = 0;
+        for(int i=0; i<s.size(); i++)
+            n = n * 10 + (path[i] - '0');
         if (d == 1)
             ans ++;
-        else if ((stol(path) % d) == 0)
+        else if (n % d == 0)
             ans ++;
         return;
     }
