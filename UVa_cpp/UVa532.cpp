@@ -16,7 +16,7 @@ struct Node{
     int x, y, z, dist;
 };
 
-Node queue[100];
+Node queue[100000];
 
 int bfs(Node s, Node e){
     int i, j, k;
@@ -25,12 +25,14 @@ int bfs(Node s, Node e){
 
     queue[0].x = s.x;
     queue[0].y = s.y;
+    queue[0].z = s.z;
     queue[0].dist = 0;
     used[s.z][s.y][s.z] = true;
     
     for(i=0, j=1; i<j; i++){
+        // cout << "i = " << i << " j = " << j << "\n" ;
         curr = queue[i];
-        if (curr.x == e.x && curr.y == e.y && curr.z == e.z){
+        if (maze[curr.z][curr.y][curr.x] == 'E'){
             return curr.dist;
         }
         for(k=0; k<6; k++){
@@ -44,7 +46,9 @@ int bfs(Node s, Node e){
                 next.z >= 0 && next.z < L &&
                 maze[next.z][next.y][next.x] != '#' &&
                 used[next.z][next.y][next.x] == false){
-                
+
+                // cout << "next x = " << next.x << " y = " << next.y << " z = " << next.z << "\n";
+                // cout << "distance = " << next.dist << "\n";
                 used[next.z][next.y][next.x] = true;
                 queue[j] = next;
                 j++;
