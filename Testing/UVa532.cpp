@@ -1,16 +1,25 @@
 #include <iostream>
 
 using namespace std;
-
-int dx[6] = {};
-int dy[6] = {};
-int dz[6] = {};
-
+//          
+int dx[6] = {1,-1, 0, 0, 0, 0};
+int dy[6] = {0, 0, 1,-1, 0, 0};
+int dz[6] = {0, 0, 0, 0, 1,-1};
+//   maze[z][y][x]
 char maze[30][30][30];
 int L, R, C;
 
+struct Node{
+    int x, y, z, dst;
+};
+
+int bfs(Node s, Node e){
+    Node cur
+    if ()
+}
+
 int main(){
-    int x1, x2, y1, y2, z1, z2;
+    Node start, end; 
     while(cin >> L >> R >> C){
         cout << L << " " << R << " " << C << "\n";
         if (L == 0 && R == 0 && C == 0)
@@ -22,13 +31,14 @@ int main(){
                     char c;
                     cin >> c;
                     if (c == 'S'){
-                        x1 = k;
-                        y1 = j;
-                        z1 = i;
+                        start.x = k;
+                        start.y = j;
+                        start.z = i;
+                        cout << "S";
                     } else if ( c == 'E'){
-                        x2 = k;
-                        y2 = j;
-                        y2 = i;
+                        end.x = k;
+                        end.y = j;
+                        end.z = i;
                     }
                     maze[i][j][k] = c;
 
@@ -36,7 +46,7 @@ int main(){
             }
         }
 
-        cout << "x = " << x1 << " y = " << y1 << " z = " << z1 << "\n";
+        cout << "x = " << start.x << " y = " << start.y << " z = " << start.z << "\n";
         
     }
 }
