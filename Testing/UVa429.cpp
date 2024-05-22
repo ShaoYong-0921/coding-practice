@@ -8,7 +8,7 @@ bool edge[1000][1000];
 struct map{
     string s;
     int n;
-}
+};
 
 int main(){
     int T, i, j, k;

@@ -10,24 +10,28 @@ int main(){
         f /= 100.0;
         //cout <<  h << " " << u << " "<< d << " "<< f << "\n";
         bool status;
-        int ans, next, day = 0;
+        int ans, day = 0;
         double curr = 0.0;
         double fatigue = u * f;
         while(true){
-            curr += u - (day * fatigue);
+            double climb = u - (day * fatigue);
+            if (climb < 0)
+                climb = 0;
+            curr += climb;
+            // cout << "fatigue = " << fatigue * day << "\n";
             day ++;
             if (curr > h){
-                //cout << "T curr = " << curr << "\n";
+                // cout << "T curr = " << curr << "\n";
                 status = true;
                 break;
             }
             curr -= d;
             if (curr < 0){
-                //cout << "F curr = " << curr << "\n";
+                // cout << "F curr = " << curr << "\n";
                 status = false;
                 break;
             }
-            //cout << "curr = " << curr << "\n";
+            // cout << "curr = " << curr << "\n";
         }
         if (status)
             cout << "success on day ";
