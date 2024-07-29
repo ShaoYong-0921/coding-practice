@@ -8,44 +8,68 @@ struct ListNode{
     ListNode(string str) : s(str) {}
 };
 
+void insert(ListNode* head, string s){
+    // cout << "s = " << s << "\n";
+    ListNode* node = new ListNode(s);
+    ListNode* ptr = head -> next;
+    node -> next = ptr;
+    head -> next = node;
+}
+
+void printS(ListNode* head, int n){
+    ListNode* ptr = head;
+    ListNode* last = ptr;
+    while(n --) {
+        last = ptr;
+        ptr = ptr -> next;
+    }
+    cout << ptr -> s;
+    last -> next = ptr -> next;
+    ptr -> next = head -> next;
+    head -> next = ptr;
+}
+
+bool atoz(char c){
+    if( ('a' <= c && c <= 'z') || ( 'A' <= c && c <= 'Z') ) return true;
+    else return false;
+}
+
 int main(){
     string s;
     ListNode* dummy = new ListNode("abc");
-    ListNode* tail = dummy;
-    cout << "s = " << dummy -> s << "\n";
     while( getline(cin, s) && s != "0"){
-        bool flag = true;
         string str = "";
         int n = 0;
+        bool last = false;
         for(int i=0; i<s.size(); i++){
-            if ( ( 'a' <= s[i] && s[i] <= 'z') || 
-                 ( 'A' <= s[i] && s[i] <= 'Z') ){
-                str += s[i];
-            }
-            else if ('0' <= s[i] && s[i] <= '9'){
-                if ('0' <= s[i-1] && s[i-1] <= '9') n = n * 10 + (s[i] - '0');
+            if (i == s.size() - 1) last = true;
+
+            if ('0' <= s[i] && s[i] <= '9'){
+                if ('0' <= s[i-1] && s[i-1] <= '9') 
+                    n = n * 10 + (s[i] - '0');
                 else n = s[i] - '0';
-                cout << "n = " << n << "\n";
-            }
-            else {
-                if (str == "") continue;
-                if (n > 0) {
-                    ListNode* ptr = dummy;
-                    for(int j=0; j<n; j++){
-                        ptr = ptr -> next;   
-                    }
-                    cout << "ptr = " << ptr -> s << "\n";
+                if (last || s[i+1] < '0' || s[i+1] > '9'){
+                    printS(dummy, n);
+                    n = 0;
                 }
-                // cout << "str = " << str << "\n";
-                tail -> next = new ListNode(str);
-                tail = tail -> next;
-                str = "";
             }
+
+            else if ( atoz(s[i]) ){
+                str += s[i];
+                if (last || !atoz(s[i+1])){
+                    cout << str;
+                    insert(dummy, str);
+                    str = "";
+                }
+            }
+            else 
+                cout << s[i];
         }
-        cout << s << '\n';
+        cout << '\n';
     }
-    while(dummy){
-        cout << dummy -> s << " ";
-        dummy = dummy -> next;
-    }
+    // while(dummy){
+    //     cout << dummy -> s << " ";
+    //     dummy = dummy -> next;
+    // }
 }
+
