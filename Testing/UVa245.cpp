@@ -6,6 +6,7 @@ struct ListNode{
     string s;
     ListNode* next = nullptr;
     ListNode(string str) : s(str) {}
+    ListNode() {}
 };
 
 void insert(ListNode* head, string s){
@@ -36,7 +37,7 @@ bool atoz(char c){
 
 int main(){
     string s;
-    ListNode* dummy = new ListNode("abc");
+    ListNode* dummy = new ListNode();
     while( getline(cin, s) && s != "0"){
         string str = "";
         int n = 0;
