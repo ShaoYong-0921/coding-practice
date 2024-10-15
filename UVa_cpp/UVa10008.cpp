@@ -4,8 +4,11 @@
 using namespace std;
 
 int main(){
+    string str;
     int n;
     map<char, int> mp;
+    cin >> n;
+    getline(cin, str);
     while(n --){
         string s;
         getline(cin, s);
@@ -16,7 +19,7 @@ int main(){
                 mp[s[i]] ++;
             }
         }
-        // cout << s << '\n';f
+        // cout << s << '\n';
     }
     int currmax = 0;
     for(map<char, int> :: iterator it=mp.begin(); it!=mp.end(); ++it)
