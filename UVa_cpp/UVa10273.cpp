@@ -25,7 +25,7 @@ int main(){
             }
         }
 
-        int day = 0, mini, loop = 3000, dead, milk, lastDay, cont = 0;
+        int day = 0, mini, loop = 5000, dead, milk, lastDay, cont = 0;
         while(loop --){
             if (cont == n) break;
             for(int i=0; i<255; i++) used[i] = 0;
