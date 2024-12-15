@@ -11,21 +11,33 @@ struct cow{
 cow c[1005];
 int used[255];
 
+int gcd(int a, int b) {
+    while (b != 0) {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+
 int main(){
     int T;
     cin >> T;
     while(T--){
         int n;
+        int loop = 1;
         cin >> n;
         for(int i=0; i<n; i++){
             cin >> c[i].t;
             c[i].live = true;
+            loop = loop * c[i].t / gcd(loop, c[i].t);
             for(int j=0; j<c[i].t; j++){
                 cin >> c[i].m[j];
             }
         }
 
-        int day = 0, mini, loop = 5000, dead, milk, lastDay, cont = 0;
+        // cout << "loop = " << loop << '\n'; 
+        int day = 0, mini, dead, milk, lastDay, cont = 0;
         while(loop --){
             if (cont == n) break;
             for(int i=0; i<255; i++) used[i] = 0;
@@ -47,6 +59,12 @@ int main(){
                 c[dead].live = false;
                 cont ++;
                 lastDay = day + 1;
+                loop = 1;
+                for(int i=0; i<n; i++){
+                    if (c[i].live == false) continue;
+                    loop = loop * c[i].t / gcd(loop, c[i].t);
+                }
+                //cout << "loop = " << loop << '\n';
                 // cout << "dead = " << dead << '\n';
             }
             day ++;
