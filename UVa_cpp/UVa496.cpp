@@ -31,18 +31,21 @@ int main(){
                 bool is_in = false;
                 for(int j=0; j<idx2; ++j){
                     if (n2 == b[j]){
-                        cout << "n2 = " << n2 << endl;
+                        // cout << "n2 = " << n2 << endl;
                         is_in = true;
                         break;
                     }
                 }
-                if (!is_in) b[idx2 ++] = n2;
+                if (!is_in) {
+                    // cout << "in " << n2 << endl;
+                    b[idx2 ++] = n2;
+                }
                 n2 = 0;
                 continue;
             }
             n2 = n2 * 10 + (s2[i] - '0');
         }
-        cout << "idx1 = " << idx1 << " idx2 = " << idx2 << endl;
+        // cout << "idx1 = " << idx1 << " idx2 = " << idx2 << endl;
 
         bool change = false;
         if (idx1 < idx2){
@@ -53,12 +56,12 @@ int main(){
 
         int cnt = 0, cnt1 = 0;
         for(int i=0; i<idx2; ++i){
-            cout << "b[" << i << "] = " << b[i] << endl;
+            // cout << "b[" << i << "] = " << b[i] << endl;
             bool in = false;
             for(int j=0; j<idx1; ++j){
                 if(b[i] == a[j]){
                     in = true;
-                    cout << "a[" << j << "] = " << a[j] << endl;
+                    // cout << "a[" << j << "] = " << a[j] << endl;
                     break;
                 }
             }
