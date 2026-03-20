@@ -26,7 +26,7 @@ vector<string> split(string s){
     vector<string> v;
     int n = s.size();
     string output = "";
-    for(int i=0; i<n; ++i){f
+    for(int i=0; i<n; ++i){
         output += s[i];
         bool push = false;
         if(i == n -1) push = true;
@@ -89,37 +89,69 @@ int main(){
             }
         }
         
-        for(auto i : ans) cout << i << " ";
-        cout << endl;
+        // for(auto i : ans) cout << i << " ";
+        // cout << endl;
 
         string ins = "", del = "";
+        string inserts = "", deletes = "", changes = "";
+
         char last = ' ';
         int idx = ans.size();
         int idx1 = 0, idx2 = 0;
-        int pos = 0, startp = 0;
-        bool setp = false;
+        int pos = 0, startp = -1;
         for(int i=0; i<=idx; ++i){
-            char op = (k < ans.size()) ? ans[idx - 1 - i] : 'M';
+            char op = (i < ans.size()) ? ans[idx - 1 - i] : 'M';
+            // cout << "op: " << op << endl;
 
             if (op != 'M'){
+                if (startp == -1) startp = pos;
                 if (op == 'I'){
                     // cout << "insert :" << v1[idx1++] << endl;
-                    ins += v1[idx++];
+                    ins += v1[idx1++];
                 }
                 else if (op == 'D'){
-                    // cout << "delete : " << v2[idx2++] << endl;
+                    pos += v2[idx2].size();
                     del += v2[idx2++];
+                    // cout << "delete : " << v2[idx2++] << endl;
                 }
                 else if (op == 'R'){
-                    ins += v1[idx++];zjkl
+                    pos += v2[idx2].size();
+                    ins += v1[idx1++];
                     del += v2[idx2++];
                     // cout << "change : " << v1[idx1++] << "|" << v2[idx2++] << endl;
                 }
+                
             }
-            
-
-            pos += v2.size();zxc
+            else{
+                if (ins != "" && del == ""){
+                    // cout << "pos " << startp << " inserted " << ins.size()
+                    //     << " chars \"" << ins << "\"\n";
+                    inserts += "pos " + to_string(startp) + " inserted " + to_string(ins.size()) 
+                        + " chars \"" + ins + "\"\n";
+                }
+                else if (ins == "" && del != ""){
+                //     cout << "pos " << startp << " deleted " << del.size()
+                //         << " chars \"" << del << "\"\n";
+                    deletes += "pos " + to_string(startp) + " deleted " + to_string(del.size()) 
+                        + " chars \"" + del + "\"\n";
+                }
+                else if (ins != "" && del != ""){
+                    // cout << "pos " << startp << " changed " << del.size() 
+                    //     << " chars from \"" << del << "\" to \"" << ins << "\"\n";
+                    changes += "pos " + to_string(startp) + " changed " + to_string(del.size()) + 
+                        " chars from \"" + del + "\" to \"" + ins + "\"\n";
+                }
+                if (i < ans.size()){
+                    pos += v2[idx2].size();
+                    idx1 ++;
+                    idx2 ++;
+                    ins = "";
+                    del = "";
+                    startp = -1;
+                }
+            }
+           
         }
-        cout << endl;
+        cout << deletes << inserts << changes << '\n';
     }
 }
