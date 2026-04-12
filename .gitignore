@@ -9,6 +9,7 @@
 /bower_components/
 
 main
+test.cpp
 
 .cph
 .env
