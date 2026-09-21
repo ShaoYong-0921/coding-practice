@@ -1,131 +1,62 @@
 #include <iostream>
-#include <climits>
 
 using namespace std;
 
-/*
-  a
-b   c   
-  d
-e   f
-  g
-*/
+string num[10]= { "abcefg", "cf", "acdeg", "acdfg", "bcdf", "abdfg", "abdefg", "acf", "abcdefg", "abcdfg"};
 
-string lcd[15] = {
-  "abcefg", "cf", "acdeg", "acdfg", "bcdf",
-  "abdfg", "abdefg", "acf", "abcdefg", "abcdfg"
-};
-
-
-bool find(char c, int n){
-  // cout << "lcd = " << lcd[n] << endl;
-  for(auto i: lcd[n]){
-    // cout << "i = " << i << endl;
-    if (i == c) return true;
-  }
-  return false;
-}
 
 int main(){
-    int s;
-    string n;
-    while( cin >> s >> n ){
-      if (s == 0 && n == "0") break;
-      string output = "";
-      bool f = true;
-      // head 
-      for(auto i : n){
-        int num = i - '0';
-        if (!f) output += " ";
-        f = false;
 
-        if (find('a', num)){
-          output += " ";
-          for(int j=0; j<s; ++j) output += "-";  
-          output += " ";
-        }
-        else
-          for(int j=0; j<s+2; ++j) output += " ";
-        
-      }
-      cout << output << endl;
-      
+    int s, n;
+    string numbers;
 
-      // body
-      output = "";
-      for(int j=0; j<s; ++j){
-        f = true;
-        for(auto i : n){
-          int num = i - '0';
-          if (!f) output += " ";
-          f = false;
+    while(cin >> s >> numbers){
+        if (s == 0 && numbers == "0") break;
 
-          if (find('b', num)) output += "|";
-          else output += " ";
-          for(int k=0; k<s; ++k) output += " ";
-          if (find('c', num)) output += "|";
-          else output += " ";
-  
-        }
-        output += '\n';
-      }
-      cout << output ;
+        auto find = [&](char c) -> bool {
+            for(auto i : num[n]) if (i == c) return true; 
+            return false;
+        };
 
-      // middle
-      output = "", f = true;
-      for(auto i : n){
-        int num = i - '0';
-        if (!f) output += " ";
-        f = false;
+        auto output_h = [&](char c) -> void {
+            bool f = true;
+            for(int j=0; j<numbers.size(); ++j){
+                if (!f) cout << " "; f = false;
 
-        if (find('d', num)){
-          output += " ";
-          for(int j=0; j<s; ++j) output += "-";  
-          output += " ";
-        }
-        else
-          for(int j=0; j<s+2; ++j) output += " ";
-        
-      }
-      cout << output << endl;
+                n = numbers[j] - '0';
+                cout << " ";
+                for(int i=0; i<s; ++i){
+                    if (find(c)) cout << "-";
+                    else cout << " ";
+                }
+                cout << " ";
+            }
+            cout << '\n';
+        };
 
-      // body
-      output = "";
-      for(int j=0; j<s; ++j){
-        f = true;
-        for(auto i : n){
-          int num = i - '0';
-          if (!f) output += " ";
-          f = false;
-          
-          if (find('e', num)) output += "|";
-          else output += " ";
-          for(int k=0; k<s; ++k) output += " ";
-          if (find('f', num)) output += "|";
-          else output += " ";
-  
-        }
-        output += '\n';
-      }
-      cout << output ;
+        auto output_m = [&](char c1, char c2) -> void {
+            bool f = true; 
+            for(int j=0; j<numbers.size(); ++j){
+                if (!f) cout << " "; f = false;
+                n = numbers[j] - '0';
 
-      // bottom
-      output = "", f = true;
-      for(auto i : n){
-        int num = i - '0';
-        if (!f) output += " ";
-        f = false;
+                if (find(c1)) cout << "|";
+                else cout << " ";
+                for(int j=0; j<s; ++j) cout << " ";
+                if (find(c2)) cout << "|";
+                else cout << " ";
 
-        if (find('g', num)){
-          output += " ";
-          for(int j=0; j<s; ++j) output += "-";  
-          output += " ";
-        }
-        else
-          for(int j=0; j<s+2; ++j) output += " ";
-        
-      }
-      cout << output << endl << endl;
+            }
+            cout << '\n';
+        };
 
+        output_h('a');
+        for(int i=0; i<s; ++i) output_m('b', 'c');
+        output_h('d');
+        for(int i=0; i<s; ++i) output_m('e', 'f');
+        output_h('g');
+        cout << '\n';
     }
+
+
 }
