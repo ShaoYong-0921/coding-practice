@@ -1,33 +1,30 @@
 #include <iostream>
-#include <cmath>
+#include <vector>
+#include <cstring>
 
 using namespace std;
 
-int s[1005];
-
-void sumfactors(){
-    for(int i=0; i<=1005; i++) s[i] = -1;
-    s[1] = 1;
-    for(int i=2; i<=1000; i++){
-        int sum = i;
-        for(int j=1; j<=i/2; j++){
-            if (i % j == 0) {
-                // cout << "+ " << j << '\n';
-                sum += j;
-                if (sum > 1000) break;
-            }
-        }
-        if (sum > 1000) continue;
-        s[sum] = i;
-        // cout << i << ": sum = " << sum << endl;
-    }
-    return;
-}
+int ans[100000];
 
 int main(){
-    sumfactors();
-    int n, count = 1;
-    while(cin >> n && n != 0){
-        cout << "Case " << count++ << ": " << s[n] << '\n';
+    memset(ans, -1, sizeof(ans));
+    for(int i=1; i<=1000; i++){
+        vector<int> factor({i});
+        for(int j=1; j<i/2+1; j++){
+            if (i % j == 0) factor.push_back(j);
+            else continue;
+        }
+        int sum = 0;
+        //cout << "i = " << i << endl;
+        for(auto &k : factor) {
+            // cout << k << " ";
+            sum += k;
+        }
+        // cout << "sum = " << sum << endl;
+        ans[sum] = i;
+    }
+    int n, kase = 0;
+    while(cin >> n && n){
+        cout << "Case " << ++ kase << ": "<< ans[n] << endl;
     }
 }

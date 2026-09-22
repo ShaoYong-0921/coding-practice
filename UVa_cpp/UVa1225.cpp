@@ -1,34 +1,24 @@
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 
 int ans[10];
 
 int main(){
-    int n;
-    cin >> n;
-    while(n --){
-        for(int i=0; i<10; ++i) ans[i] = 0;
-        int num;
-        cin >> num;
-        for(int i=1; i<=num; ++i){
-            int k = i;
-            while(k > 0){
-                // cout << "i = " << k << endl;
-
-                // if (k == 0){
-                //     ans[0] ++;
-                //     break;
-                // }
-                ans[k%10] ++;
-                k /= 10;
-            }
+    int t; cin >> t;
+    while(t --){
+        int n; cin >> n;
+        memset(ans, 0, sizeof(ans));
+        int tmp = n;
+        while( n > 0 ){
+            string s = to_string(n);
+            // cout << s << endl;
+            for(auto &i : s) ans[i - '0'] ++;
+            n --;
         }
-
-        bool first = true;
-        for(int i=0; i<10; ++i){
-            if (!first) cout << " ";
-            first = false;
+        for(int i=0; i<10; ++i) {
+            if (i > 0) cout << " ";
             cout << ans[i];
         }
         cout << '\n';
